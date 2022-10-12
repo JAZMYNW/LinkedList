@@ -5,7 +5,6 @@ using namespace std;
 
  Node::Node(int data){
     this->data = data;
-
  }
 
 
@@ -22,7 +21,7 @@ using namespace std;
     LinkedList::~LinkedList(){
         Node *current = head;
         Node *temp = NULL;
-        while(current){
+        while(current->next){
             temp = current->next;
             delete current;
             current = temp;
@@ -124,7 +123,7 @@ using namespace std;
   
    // prints linked list data
     void LinkedList::print(){
-        while(head){
+        while(head->next){
             cout<< head->data << " ";
             head = head->next;
         }
