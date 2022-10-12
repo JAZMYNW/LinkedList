@@ -3,6 +3,13 @@
 #include <math.h>
 using namespace std;
 
+ Node::Node(int data){
+    this->data = data;
+    Node *next = NULL;
+    Node *previous = NULL;
+ }
+
+
 
     //constructor
     LinkedList::LinkedList(){
