@@ -66,59 +66,48 @@ using namespace std;
 
     }                          
     void LinkedList::insertToMedian(int data){
-        int mednum;
-        if(size%2 ==0){
-            mednum = size/2;
-        } else {
-            mednum = ceil(size/2); }
-        Node* current = head;
-        for(int i =0;i<mednum; i++){
-            current = current->next; // Loop sets current as current median node
+        Node *temp = head;
+        int mednum = ceil(size/2);
+        while(mednum--){
+            temp = temp->next;
         }
-        Node *beforemed = current->prev; // node before median node
         Node *newNode = new Node(data);
-        newNode->next = current;
-        newNode->prev = beforemed;
-        beforemed->next = newNode;
-        current->prev = newNode;
+        Node *temp1 = temp->next;
+        Node * temp2 = temp->prev;
+        temp2->next = newNode;
+        newNode->prev = temp2;
+        temp->prev = newNode;
+        newNode->next = temp;
+        size++;
 
         
 
     }                  
     // remove node from meidan position of list, return its data
     int LinkedList::removeFromMedian(){
-    int mednum;
-        if(size%2 ==0){
-            mednum = size/2;
-        } else {
-            mednum = ceil(size/2); }
-        Node* current = head;
-        for(int i =0;i<mednum; i++){
-            current = current->next; // Loop sets current as current median node
+        Node *current = head;
+        int mednum = ceil(size/2);
+        while(mednum--){
+            current = current->next;
         }
-        return current->data;
+        Node *temp1= current->next;
+        Node *temp2 = current->prev; 
+        temp1->prev = current->prev;
+        temp2->prev = current->next;
+        delete current;
+        size--;
+
 
     }                         
     
     // prints the data of the median position
     int LinkedList::returnMedian(){
-        int datstore;
-        int mednum;
-        if(size%2 ==0){
-            mednum = size/2;
-        } else {
-            mednum = ceil(size/2); }
-        Node* current = head;
-        for(int i =0;i<mednum; i++){
-            current = current->next; // Loop stops at current median node
+        Node *current = head;
+        int mednum = ceil(size/2);
+        while(mednum--){
+            current = current->next;
         }
-        Node *tempfirst = current->prev;
-        Node *templast = current->next;
-        tempfirst->next = templast;
-        templast->prev = tempfirst;
-        datstore = current->data;
-        delete current;
-        return datstore;
+        return current->data;
     }                             
   
    // prints linked list data
