@@ -32,7 +32,6 @@ using namespace std;
     // insert node with data to tail of list
     void LinkedList::insertToTail(int data) {
         Node *newNode = new Node(data);
-	this->data = data;
 	if(size ==0){
         newNode ->next = NULL;
         newNode->prev = NULL;
@@ -41,10 +40,10 @@ using namespace std;
         size++;
 	}
 	else{
-	node->next = NULL;
-	node->prev = tail;
+	newNode->next = NULL;
+	newNode->prev = tail;
 	tail->next = newNode;
-	tail = node;
+	tail = newNode;
 	size++;
 	}
     }                  
@@ -57,28 +56,29 @@ using namespace std;
         tail=NULL;
         head=NULL;
         delete current;
-	size--;	
-	return taildat;
-	} else if(tail==NULL){
+	    size--;	
+	    return taildat;
+	} 
+    else if(tail==NULL){
 	cout<<"Error, list is empty!"<< endl;
 	return 0;
-	} else 
+	} else{} 
 	Node *current = tail;
-	int taldat = tail->data;
+	int taildat = tail->data;
 	tail = tail->prev;
 	tail->next = NULL;
 	delete current;
 	size--;
 	return taildat;
+    }
 	
 
-}
+
                         
     
     // insert node with data to head of list
     void LinkedList::insertToHead(int data){
- 	Node *newNode = new Node(data);
-        this->data = data; 
+ 	Node *newNode = new Node(data); 
     if(size!=0){
         newNode->next = head;
         newNode->prev = NULL;
@@ -92,8 +92,8 @@ using namespace std;
 	}
     
     // remove node from head of list, return its data
-    int LinkedList::removeFromHead(){
-    if(size==1){
+     int LinkedList::removeFromHead(){  
+        if(size==1){
         Node *current = head;
         int headdat = head->data;
         tail=NULL;
@@ -103,16 +103,20 @@ using namespace std;
         return headdat;
         } else if(head==NULL){
         cout<<"Error, list is empty!"<< endl;
-	return 0;
-        } else
+	    return 0;
+        } else{
         Node *current = head;
         int headdat = head->data;
         head = head->next;
         head->prev = NULL;
-	delete current;
-	size--;
-	return headdat;
-    }                          
+	    delete current;
+	    size--;
+	    return headdat;
+    }
+     }
+    
+    
+
     void LinkedList::insertToMedian(int data){
         Node *temp = head;
         int mednum = ceil(size/2);
