@@ -90,7 +90,7 @@ using namespace std;
 	tail = newNode;
 	head = newNode;
 	}
-    
+    }
     // remove node from head of list, return its data
      int LinkedList::removeFromHead(){  
         if(size==1){
@@ -176,7 +176,4 @@ using namespace std;
     }                                   // prints linked list data
    
 
-    Node* head;                                     // head of list
-    Node* tail;                                     // tail of list
-    Node* median;                                   // median of list
-    int size;                                       // number of elements in the list
+ 
