@@ -32,38 +32,86 @@ using namespace std;
     // insert node with data to tail of list
     void LinkedList::insertToTail(int data) {
         Node *newNode = new Node(data);
+	this->data = data;
+	if(size ==0){
         newNode ->next = NULL;
-        newNode->prev = tail;
+        newNode->prev = NULL;
         tail = newNode;
+	head = newNode;
         size++;
+	}
+	else{
+	node->next = NULL;
+	node->prev = tail;
+	tail->next = newNode;
+	tail = node;
+	size++;
+	}
     }                  
     
     // remove node from tail of list, return its data
     int LinkedList::removeFromTail()  {
-        Node *current = tail;
-        Node *temp = tail->prev;
+       if(size==1){
+	Node *current = tail;
+	int taildat = tail->data;
+        tail=NULL;
+        head=NULL;
         delete current;
-        tail = temp;
-        size--;
-    }                        
+	size--;	
+	return taildat;
+	} else if(tail==NULL){
+	cout<<"Error, list is empty!"<< endl;
+	return 0;
+	} else 
+	Node *current = tail;
+	int taldat = tail->data;
+	tail = tail->prev;
+	tail->next = NULL;
+	delete current;
+	size--;
+	return taildat;
+	
+
+}
+                        
     
     // insert node with data to head of list
     void LinkedList::insertToHead(int data){
-        Node *newNode = new Node(data);
+ 	Node *newNode = new Node(data);
+        this->data = data; 
+    if(size!=0){
         newNode->next = head;
         newNode->prev = NULL;
-        head = newNode;
+        head->prev = newNode;
         size++;
-    }
+    } else{
+	newNode->next = NULL;
+	newNode->prev = NULL;
+	tail = newNode;
+	head = newNode;
+	}
     
     // remove node from head of list, return its data
     int LinkedList::removeFromHead(){
+    if(size==1){
         Node *current = head;
-        Node *temp = head->next;
+        int headdat = head->data;
+        tail=NULL;
+        head=NULL;
         delete current;
-        head = temp;
         size--;
-
+        return headdat;
+        } else if(head==NULL){
+        cout<<"Error, list is empty!"<< endl;
+	return 0;
+        } else
+        Node *current = head;
+        int headdat = head->data;
+        head = head->next;
+        head->prev = NULL;
+	delete current;
+	size--;
+	return headdat;
     }                          
     void LinkedList::insertToMedian(int data){
         Node *temp = head;
@@ -90,12 +138,14 @@ using namespace std;
         while(mednum--){
             current = current->next;
         }
+	int currentdat = current->data;
         Node *temp1= current->next;
         Node *temp2 = current->prev; 
         temp1->prev = current->prev;
         temp2->prev = current->next;
         delete current;
         size--;
+	return currentdat;
 
 
     }                         
@@ -112,10 +162,13 @@ using namespace std;
   
    // prints linked list data
     void LinkedList::print(){
-        while(head->next){
-            cout<< head->data << " ";
-            head = head->next;
-        }
+        Node *iter=head;
+	for(int i = 0;i<size;i++){
+            cout<< iter->data << " ";
+            iter = iter->next;
+	}
+	cout<<endl;
+	delete iter;
     }                                   // prints linked list data
    
 
